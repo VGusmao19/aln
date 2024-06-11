@@ -1,0 +1,71 @@
+<form [formGroup]="formulario">
+    <!-- NOME -->
+    @if (formulario.get('nome').hasError('required') && formulario.get('nome').touched){
+        <div class="alert alert-danger" role="alert">
+            Nome obrigatório
+        </div>
+    }
+    <input type="text" formControlName="nome" placeholder="Nome" class="form-control">
+    <!-- NOTA 1 -->
+    @if (formulario.get('nota1').hasError('min') && formulario.get('nota1').touched){
+        <div class="alert alert-danger" role="alert">
+            Nota invalida
+        </div>
+    }
+    @if (formulario.get('nota1').hasError('max') && formulario.get('nota1').touched){
+        <div class="alert alert-danger" role="alert">
+            Nota invalida
+        </div>
+    }
+    @if (formulario.get('nota1').hasError('required') && formulario.get('nota1').touched){
+        <div class="alert alert-danger" role="alert">
+            Precisa ser preenchida
+        </div>
+    }
+    <input type="number" formControlName="nota1" placeholder="Nota 1" class="form-control">
+
+    <!-- NOTA 2 -->
+    @if (formulario.get('nota2').hasError('min') && formulario.get('nota2').touched){
+        <div class="alert alert-danger" role="alert">
+            Nota invalida
+        </div>
+    }
+    @if (formulario.get('nota2').hasError('max') && formulario.get('nota2').touched){
+        <div class="alert alert-danger" role="alert">
+            Nota invalida
+        </div>
+    }
+    @if (formulario.get('nota2').hasError('required') && formulario.get('nota2').touched){
+        <div class="alert alert-danger" role="alert">
+            Nota Precisa ser preenchida
+        </div>
+    }
+    <input type="number" formControlName="nota2" placeholder="Nota 2" class="form-control">
+
+    <input type="button" value="Cadastrar" (click)="cadastrar()" class="btn btn-primary">
+</form>
+<p>Média dos alunos: {{ calcularMedia() }}</p>
+<div *ngIf="melhorAluno() as melhor">
+    <p>Melhor aluno: {{ melhor.nome }} Média: {{ melhor.media }}</p>
+  </div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">nota 1</th>
+        <th scope="col">Nota 2</th>
+        <th scope="col">Média</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of vetor; index as indice">
+        <td>{{indice + 1}}</td>
+        <td>{{v.nome}}</td>
+        <td>{{v.nota1}}</td>
+        <td>{{v.nota2}}</td>
+        <td>{{v.nota1/v.nota2}}</td>
+      </tr>
+    </tbody>
+  </table>
